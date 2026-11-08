@@ -1,13 +1,27 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Приглашение</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html lang="ru"> <!-- Изменили lang на ru, так как приглашение на русском -->
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Приглашение</title>
+
+  <!-- Иконка для iOS (Safari) -->
+  <link rel="apple-touch-icon" href="/icons8-wedding-96.png" />
+
+  <!-- Настройки полноэкранного режима для iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Приглашение" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Главный тег для Android / Chrome и современных браузеров -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Цвет панели браузера (подгоните под дизайн вашей свадьбы) -->
+  <meta name="theme-color" content="#ffffff" />
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
+</body>
 </html>

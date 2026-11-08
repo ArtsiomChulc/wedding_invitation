@@ -1,0 +1,21 @@
+{
+  "short_name": "Приглашение",
+  "name": "Свадебное приглашение",
+  "icons": [
+    {
+      "src": "/icons8-wedding-96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/icons8-wedding-96.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "theme-color": "#ffffff"
+}
