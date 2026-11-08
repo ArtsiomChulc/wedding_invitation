@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Hero } from './sections/Hero';
+import { Countdown } from './sections/Countdown.tsx';
+import { Timeline } from './sections/Timeline.tsx';
 
 function App() {
   return (
@@ -8,14 +10,10 @@ function App() {
       <Hero />
 
       {/* 2. Секция Таймера (Placeholder) */}
-      <SectionPlaceholder>
-        <h2>Здесь будет Таймер обратного отсчета</h2>
-      </SectionPlaceholder>
+      <Countdown targetDate="2027-01-08T16:00:00" />
 
       {/* 3. Секция Программы дня (Placeholder) */}
-      <SectionPlaceholder>
-        <h2>Здесь будет Программа дня (Таймлайн)</h2>
-      </SectionPlaceholder>
+      <Timeline />
 
       {/* 4. Секция RSVP Формы (Placeholder) */}
       <SectionPlaceholder>
