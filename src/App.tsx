@@ -11,7 +11,7 @@ function App() {
       <Hero />
 
       {/* 2. Секция Таймера (Placeholder) */}
-      <Countdown targetDate="2027-01-09 T16:00:00" />
+      <Countdown targetDate="2027-01-09 T15:00:00" />
 
       {/* 3. Секция Программы дня (Placeholder) */}
       <Timeline />
