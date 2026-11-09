@@ -9,6 +9,7 @@ import { useGuest } from './hooks/useGuest';
 function App() {
   const { guest, loading } = useGuest();
   const [isOpened, setIsOpened] = useState<boolean>(false);
+  console.log('guest ', guest);
 
   useEffect(() => {
     if (!loading) {
