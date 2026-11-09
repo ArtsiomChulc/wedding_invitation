@@ -9,30 +9,35 @@ export const useGuest = () => {
     const params = new URLSearchParams(window.location.search);
     const idParam = params.get('id');
 
-    // Если параметра id нет в ссылке, просто выключаем лоадер
     if (!idParam) {
       setLoading(false);
       return;
     }
 
-    // Тот самый URL из вашей панели Stein (обязательно с /guests на конце)
     const STEIN_API_URL =
       'https://api.steinhq.com/v1/storages/6af0bb5b92b1163e976018e3/guests';
 
-    fetch(`${STEIN_API_URL}?search=${JSON.stringify({ id: idParam })}`)
+    fetch(STEIN_API_URL)
       .then((res) => {
-        if (!res.ok) throw new Error('Ошибка загрузки данных с сервера');
+        if (!res.ok) throw new Error();
         return res.json();
       })
       .then((data: GoogleGuest[]) => {
-        // Проверяем, что нам вернулся массив и он не пустой
-        if (data && data.length > 0) {
-          setGuest(data[0]); // Сохраняем первого найденного гостя
+        if (!Array.isArray(data)) return;
+
+        const foundGuest = data.find(
+          (item) =>
+            item &&
+            item.id &&
+            String(item.id).trim().toLowerCase() ===
+              String(idParam).trim().toLowerCase()
+        );
+
+        if (foundGuest) {
+          setGuest(foundGuest);
         }
       })
-      .catch((err) => {
-        console.error('Ошибка в хуке useGuest:', err);
-      })
+      .catch(() => {})
       .finally(() => {
         setLoading(false);
       });
