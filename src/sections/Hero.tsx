@@ -10,6 +10,16 @@ interface HeroProps {
 export const Hero = ({ guest, isOpened }: HeroProps) => {
   const isPlural = guest?.isPlural.toUpperCase() === 'TRUE';
 
+  const getName = () => {
+    if (isPlural && guest) {
+      return 'Приглашаем вас на свадьбу!';
+    } else if (!isPlural && guest) {
+      return 'Приглашаем тебя на свадьбу!';
+    } else {
+      return 'Приглашаем вас на свадьбу!';
+    }
+  };
+
   return (
     <HeroSection $isOpened={isOpened}>
       {/* Сцена анимации конверта (работает первые 3.5 секунды) */}
@@ -30,11 +40,7 @@ export const Hero = ({ guest, isOpened }: HeroProps) => {
           <SubTitle>
             {guest ? guest.names : 'Дорогие друзья и близкие'}
           </SubTitle>
-          <Title>
-            {isPlural
-              ? 'Приглашаем вас на свадьбу!'
-              : 'Приглашаем тебя на свадьбу!'}
-          </Title>
+          <Title>{getName()}</Title>
           <Divider />
           <WeddingCouple>НИКИТА & ВЕРОНИКА</WeddingCouple>
           <DateText>09.01.2027</DateText>
