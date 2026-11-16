@@ -50,44 +50,47 @@ export const RSVPForm = () => {
     e.preventDefault();
     setStatus('loading');
 
-    // Формируем объект данных в соответствии с заголовками листа `responses`
-    // Stein ожидает массив объектов, даже если мы отправляем одну строку
-    const responseData = [
-      {
-        name: formData.name,
-        attending: formData.attending === 'yes' ? 'Придет ✅' : 'Не придет ❌',
-        alcohol:
-          formData.attending === 'yes' ? formData.alcohol.join(', ') : '—',
-        transport:
-          formData.attending === 'yes'
-            ? formData.transport
-              ? 'Нужен 🚌'
-              : 'Не нужен'
-            : '—',
-      },
-    ];
+    const payload = {
+      name: formData.name,
+      attending: formData.attending === 'yes' ? 'Придет ✅' : 'Не придет ❌',
+      alcohol:
+        formData.attending === 'yes'
+          ? formData.alcohol.join(', ') || 'Не указано'
+          : '—',
+      transport:
+        formData.attending === 'yes'
+          ? formData.transport
+            ? 'Нужен 🚌'
+            : 'Не нужен'
+          : '—',
+    };
 
     try {
-      // Вставляем реальный fetch-запрос к листу responses
-      const response = await fetch(
+      // 1. Сохраняем ответ в Google Таблицу через Stein
+      const steinResponse = await fetch(
         'https://api.steinhq.com/v1/storages/6af0bb5b92b1163e976018e3/responses',
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(responseData),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify([payload]),
         }
       );
 
-      // Если сервер Stein ответил успешно (статус 200-299)
-      if (response.ok) {
-        setStatus('success');
-      } else {
+      if (!steinResponse.ok) {
         setStatus('error');
+        return;
       }
-    } catch (error) {
-      console.error('Ошибка при отправке RSVP:', error);
+
+      // 2. Отправляем запрос на сервер бота для push-уведомления
+      // Замените URL на ваш реальный адрес сервиса на Render
+      fetch('https://wedding-bot-1-smjt.onrender.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(() => {});
+
+      setStatus('success');
+    } catch {
       setStatus('error');
     }
   };
