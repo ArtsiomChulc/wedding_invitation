@@ -83,7 +83,7 @@ export const RSVPForm = () => {
 
       // 2. Отправляем запрос на сервер бота для push-уведомления
       // Замените URL на ваш реальный адрес сервиса на Render
-      fetch('https://wedding-bot-1-smjt.onrender.com', {
+      fetch('https://wedding-bot-1-smjt.onrender.com/notify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
